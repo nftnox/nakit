@@ -70,8 +70,8 @@
       gap: 10px;
     }
     #cartItems img {
-      width: 40px;
-      height: 40px;
+      width: 80px;
+      height: 80px;
       object-fit: cover;
       border-radius: 6px;
     }
@@ -96,6 +96,7 @@
       height: 220px;
       overflow: hidden;
       border-radius: 10px;
+      margin-bottom: 10px;
     }
     .slides {
       display: flex;
@@ -124,8 +125,6 @@
       padding: 5px 10px;
       cursor: pointer;
     }
-
-    /* TOGGLE MENI ZA MOBILNE */
     .toggle-menu {
       display: none;
     }
@@ -145,82 +144,108 @@
       color: #444;
       padding: 5px 0;
     }
-
     @media (max-width: 768px) {
       nav ul {display: none;}
       .toggle-menu {display: block;}
     }
-
     .fullscreen-dropdown {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 999;
-  flex-direction: row;
-}
-
-
-.menu-left {
-  width: 50%;
-  background: #ffe0ef;
-  padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  justify-content: space-between;
-}
-
-.menu-left a {
-  text-decoration: none;
-  font-size: 18px;
-  color: #333;
-  font-weight: bold;
-}
-.menu-right {
-  width: 50%;
-  backdrop-filter: blur(6px);
-  background: rgba(0, 0, 0, 0.1);
-}
-.hamburger {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 24px;
-  height: 18px;
-}
-.hamburger span {
-  display: block;
-  height: 3px;
-  background: #444;
-  border-radius: 2px;
-}
-.toggle-menu button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-}
-
-.checkout-form input {
-  width: 100%;
-  max-width: 400px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 15px;
-}
-.checkout-form button {
-  padding: 10px 20px;
-  background: #d96ca1;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 15px;
-}
-
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 999;
+      flex-direction: row;
+    }
+    .menu-left {
+      width: 50%;
+      background: #ffe0ef;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: space-between;
+    }
+    .menu-left a {
+      text-decoration: none;
+      font-size: 18px;
+      color: #333;
+      font-weight: bold;
+    }
+    .menu-right {
+      width: 50%;
+      backdrop-filter: blur(6px);
+      background: rgba(0, 0, 0, 0.1);
+    }
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 18px;
+    }
+    .hamburger span {
+      display: block;
+      height: 3px;
+      background: #444;
+      border-radius: 2px;
+    }
+    .toggle-menu button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+    }
+    .checkout-form input {
+      width: 100%;
+      max-width: 400px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    .checkout-form button {
+      padding: 10px 20px;
+      background: #d96ca1;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+    /* Okvir oko detalja proizvoda */
+    .modal-product-details {
+      border: 1px solid #eee;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .modal-product-details h3 {
+      margin-bottom: 10px;
+      color: #d96ca1;
+      font-size: 18px;
+    }
+    .modal-product-details p {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    .modal-product-details .product-price {
+      font-weight: bold;
+      color: #555;
+    }
+    .quantity-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0;
+    }
+    .quantity-wrapper label {
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .quantity-wrapper select {
+      padding: 5px 8px;
+    }
   </style>
 </head>
 <body>
@@ -247,40 +272,37 @@
     </button>
   
     <div class="fullscreen-dropdown" id="dropdown">
-        <div class="menu-right" onclick="toggleDropdown()"></div>
-        <div class="menu-left">
-          <a href="#">Početna</a>
-          <a href="#">Paketi</a>
-          <a href="#">O nama</a>
-          <a href="#" onclick="toggleCart()" style="position: relative;">🛒 Korpa 
-            <span class="cart-badge" id="cartCountMobile" style="display:none;">0</span>
-          </a>
-          
-          <div style="margin-top: auto;">
-            <p style="margin-top: 30px; font-weight: bold;">Follow us on:</p>
-            <div style="display: flex; gap: 10px; margin-top: 10px;">
-              <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384031.png" alt="Instagram" /></a>
-              <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733547.png" alt="Facebook" /></a>
-              <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733579.png" alt="Twitter" /></a>
-              <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384060.png" alt="YouTube" /></a>
-              <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/2111/2111646.png" alt="Telegram" /></a>
-            </div>
+      <div class="menu-right" onclick="toggleDropdown()"></div>
+      <div class="menu-left">
+        <a href="#">Početna</a>
+        <a href="#">Paketi</a>
+        <a href="#">O nama</a>
+        <a href="#" onclick="toggleCart()" style="position: relative;">🛒 Korpa 
+          <span class="cart-badge" id="cartCountMobile" style="display:none;">0</span>
+        </a>
+        
+        <div style="margin-top: auto;">
+          <p style="margin-top: 30px; font-weight: bold;">Follow us on:</p>
+          <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384031.png" alt="Instagram" /></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733547.png" alt="Facebook" /></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733579.png" alt="Twitter" /></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384060.png" alt="YouTube" /></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/2111/2111646.png" alt="Telegram" /></a>
           </div>
         </div>
       </div>
-      
-  
-  
+    </div>
+  </div>
 </header>
 
 <div id="cart">
-    <h3>Korpa</h3>
-    <ul id="cartItems"></ul>
-    <p>Ukupno: <span id="total">0 KM</span></p>
-    <button onclick="openCheckout()">Plati</button>
-    <button onclick="toggleCart()" style="margin-top: 10px; background: none; border: none; color: red; font-size: 16px;">✖ Zatvori</button>
-  </div>
-  
+  <h3>Korpa</h3>
+  <ul id="cartItems"></ul>
+  <p>Ukupno: <span id="total">0 KM</span></p>
+  <button onclick="openCheckout()">Plati</button>
+  <button onclick="toggleCart()" style="margin-top: 10px; background: none; border: none; color: red; font-size: 16px;">✖ Zatvori</button>
+</div>
 
 <div class="search-box">
   <input type="text" id="searchInput" placeholder="Pretraži proizvode...">
@@ -289,283 +311,321 @@
 <div class="container">
   <div class="box">
     <h2>Paketi</h2>
-    <div class="products" id="productList">
-      <!-- Proizvodi idu ovdje iz JS-a -->
-    </div>
+    <div class="products" id="productList"></div>
   </div>
 </div>
-<!-- Checkout Modal -->
+
 <!-- Checkout Modal -->
 <div id="checkoutModal">
-    <div class="modal-box">
-      <button class="close-btn" onclick="closeModal('checkoutModal')">✖</button>
-      <h3 style="margin-bottom: 20px; text-align: center; color: #d96ca1;">Podaci za dostavu</h3>
-      <form class="checkout-form" style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
-        <input type="text" placeholder="Ime i prezime" required>
-        <input type="text" placeholder="Adresa" required>
-        <input type="text" placeholder="Grad" required>
-        <input type="email" placeholder="Email" required>
-        <input type="text" placeholder="Broj kartice (simulacija)" required>
-        <button type="button" onclick="submitOrder()" style="margin-top: 10px;">Završi kupovinu</button>
-      </form>
-    </div>
+  <div class="modal-box">
+    <button class="close-btn" onclick="closeModal('checkoutModal')">✖</button>
+    <h3 style="margin-bottom: 20px; text-align: center; color: #d96ca1;">Podaci za dostavu</h3>
+    <!-- Checkout forma s dodatnim poljima -->
+    <form class="checkout-form" style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+      <input type="text" id="customerName" placeholder="Ime i prezime" required>
+      <input type="text" id="phone" placeholder="Telefon" required>
+      <input type="text" id="address" placeholder="Adresa" required>
+      <input type="text" id="city" placeholder="Grad" required>
+      <input type="email" id="email" placeholder="Email" required>
+
+      <hr style="width: 100%; border: none; border-top: 1px solid #ddd;">
+
+      <input type="text" id="cardNumber" placeholder="Broj kartice" required>
+      <input type="text" id="cardExpiry" placeholder="Datum isteka (MM/YY)" required>
+      <input type="text" id="cardCVV" placeholder="CVV" required>
+
+      <button type="button" onclick="submitOrder()" style="margin-top: 10px;">Završi kupovinu</button>
+    </form>
   </div>
-  
-  
-  <!-- Product Modal -->
-  <div id="productModal">
-    <div class="modal-box" id="productModalContent"></div>
-  </div>
-  
+</div>
 
+<!-- Product Modal -->
+<div id="productModal">
+  <div class="modal-box" id="productModalContent"></div>
+</div>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+  import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
-  
-    const firebaseConfig = {
-      apiKey: "AIzaSyAr6Y4d4Fsj_lpttvQtuFBCcx56CbeXqjs",
-      authDomain: "temu-7dc16.firebaseapp.com",
-      projectId: "temu-7dc16",
-      storageBucket: "temu-7dc16.firebasestorage.app",
-      messagingSenderId: "1023395490993",
-      appId: "1:1023395490993:web:89c11bd10a1cf9a304c690",
-      measurementId: "G-E1JYN2R8XT"
-    };
-  
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-  
-    async function loadProducts() {
-      const querySnapshot = await getDocs(collection(db, "proizvodi"));
-      const products = [];
-      querySnapshot.forEach((doc) => {
-        products.push({ id: doc.id, ...doc.data() });
+  const firebaseConfig = {
+    apiKey: "AIzaSyAr6Y4d4Fsj_lpttvQtuFBCcx56CbeXqjs",
+    authDomain: "temu-7dc16.firebaseapp.com",
+    projectId: "temu-7dc16",
+    storageBucket: "temu-7dc16.firebasestorage.app",
+    messagingSenderId: "1023395490993",
+    appId: "1:1023395490993:web:89c11bd10a1cf9a304c690",
+    measurementId: "G-E1JYN2R8XT"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Globalni niz proizvoda
+  let products = [];
+
+  // Učitavamo Firestore proizvode
+  async function loadFirebaseProducts() {
+    const querySnapshot = await getDocs(collection(db, "proizvodi"));
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      // Polje "images"
+      const allImages = [];
+      if (data.imageUrl) allImages.push(data.imageUrl);
+      if (data.gallery && Array.isArray(data.gallery)) {
+        allImages.push(...data.gallery);
+      }
+      products.push({
+        name: data.name || "BezNaziva",
+        price: data.price || 0,
+        description: data.description || "",
+        images: allImages.length ? allImages : ["https://via.placeholder.com/400"]
       });
-  
-      const list = document.getElementById('productList');
-      list.innerHTML = '';
-  
-      products.forEach((p, i) => {
+    });
+    renderProducts();
+  }
+  loadFirebaseProducts();
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  // PRIKAZ PROIZVODA
+  window.renderProducts = function() {
+    const list = document.getElementById('productList');
+    list.innerHTML = '';
+    const search = document.getElementById('searchInput').value.toLowerCase();
+    products.forEach((p, i) => {
+      if (p.name.toLowerCase().includes(search)) {
         list.innerHTML += `
           <div class="product" onclick="openProduct(${i})">
-            <img src="${p.imageUrl}" alt="${p.name}">
+            <img src="${p.images[0]}" alt="${p.name}">
             <div class="product-name">${p.name}</div>
             <div class="product-price">${p.price} KM</div>
+            <div class="product-actions">
+              <button onclick="event.stopPropagation(); addToCart(${i}, 1)">➕ Dodaj u korpu</button>
+            </div>
           </div>
         `;
-      });
-  
-      window.products = products;
-    }
-  
-    window.openProduct = function(index) {
-      const p = window.products[index];
-      let sliderImages = p.gallery.map(img => `<img src="${img}" alt="">`).join('');
-      let modal = `
-        <button class="close-btn" onclick="closeModal('productModal')">✖</button>
-        <div class="slider" style="height:260px;">
-          <div class="slides" id="slides">${sliderImages}</div>
-          <div class="slider-controls">
-            <button onclick="slide(-1)">‹</button>
-            <button onclick="slide(1)">›</button>
-          </div>
-        </div>
-        <h3>${p.name}</h3>
-        <p>${p.description}</p>
-        <p><strong>${p.price} KM</strong></p>
-      `;
-      document.getElementById('productModalContent').innerHTML = modal;
-      document.getElementById('productModal').style.display = 'flex';
-    };
-  
-    loadProducts();
-  </script>
-  
-
-  <script>
-    const products = [
-      {
-        name: 'Mini Spa za kući',
-        price: 17,
-        description: 'Opuštajući set za večernji ritual: traka za kosu, maska, ogledalce.',
-        images: [
-          'https://ae01.alicdn.com/kf/HTB1jLqkSpXXXXcIXVXXq6xXFXXX0.jpg',
-          'https://ae01.alicdn.com/kf/H7d4f3097254f405ebc967a3b56d95b02N.jpg'
-        ]
-      },
-      {
-        name: 'U torbici za svaki dan',
-        price: 15,
-        description: 'Set za brzo sređivanje u pokretu. Savršen za torbu!',
-        images: [
-          'https://ae01.alicdn.com/kf/S56cb1de5e2214d2084e0abbd042d22a1i.jpg',
-          'https://ae01.alicdn.com/kf/H8d3aa2c5fc7b4f14a5e5a20de8f7d890T.jpg'
-        ]
-      },
-      {
-        name: 'Spavaj kao beba',
-        price: 12,
-        description: 'Lavanda, maska za oči i opuštanje za savršen san.',
-        images: [
-          'https://ae01.alicdn.com/kf/HTB1Ht1vMXXXXXa3XpXXq6xXFXXX2.jpg',
-          'https://ae01.alicdn.com/kf/H29df92f0a4704f308a6249bb987b6322u.jpg'
-        ]
       }
-    ];
-    
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    
-    function renderProducts() {
-      const list = document.getElementById('productList');
-      list.innerHTML = '';
-      const search = document.getElementById('searchInput').value.toLowerCase();
-      products.forEach((p, i) => {
-        if (p.name.toLowerCase().includes(search)) {
-          list.innerHTML += `
-            <div class="product" onclick="openProduct(${i})">
-              <img src="${p.images[0]}" alt="${p.name}">
-              <div class="product-name">${p.name}</div>
-              <div class="product-price">${p.price} KM</div>
-              <div class="product-actions">
-                <button onclick="event.stopPropagation(); addToCart(${i})">➕ Dodaj u korpu</button>
-              </div>
-            </div>
-          `;
-        }
-      });
-    }
-    
-    function openProduct(index) {
-      const p = products[index];
-      let sliderImages = p.images.map(img => `<img src="${img}" alt="">`).join('');
-      let modal = `
-        <button class="close-btn" onclick="closeModal('productModal')">✖</button>
-        <div class="slider" style="height:260px;">
-          <div class="slides" id="slides">${sliderImages}</div>
-          <div class="slider-controls">
-            <button onclick="slide(-1)">‹</button>
-            <button onclick="slide(1)">›</button>
-          </div>
-        </div>
-        <h3>${p.name}</h3>
-        <p>${p.description}</p>
-        <p><strong>${p.price} KM</strong></p>
-        <div class="product-actions">
-          <button onclick="buyNow(${index})">Kupi odmah</button>
-          <button onclick="addToCart(${index})">Dodaj u korpu</button>
-        </div>
-      `;
-      document.getElementById('productModalContent').innerHTML = modal;
-      slideIndex = 0;
-      updateSlider();
-      document.getElementById('productModal').style.display = 'flex';
-    }
-    
-    let slideIndex = 0;
-    function slide(dir) {
-      const slides = document.getElementById('slides');
-      const total = slides.children.length;
-      slideIndex = (slideIndex + dir + total) % total;
-      slides.style.transform = `translateX(-${slideIndex * 100}%)`;
-    }
-    function updateSlider() {
-      document.getElementById('slides').style.transform = `translateX(0%)`;
-    }
-    
-    function toggleCart() {
-      const cartDiv = document.getElementById('cart');
-      cartDiv.style.display = cartDiv.style.display === 'none' ? 'block' : 'none';
-    }
-    
-    function toggleDropdown() {
-  const dropdown = document.getElementById('dropdown');
-  dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
-}
+    });
+  };
 
-    
-    function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
+  // OTVOR MODAL ZA PROIZVOD
+  window.openProduct = function(index) {
+    const p = products[index];
+    // Slider
+    let sliderImages = p.images.map(img => `<img src="${img}" alt="">`).join('');
+
+    // Select za količinu
+    let quantitySelect = `<select id="quantitySelect">`;
+    for(let q=1; q<=10; q++){
+      quantitySelect += `<option value="${q}">${q}</option>`;
     }
-    
-    function openCheckout() {
-      document.getElementById('checkoutModal').style.display = 'flex';
+    quantitySelect += `</select>`;
+
+    // HTML modala
+    let modal = `
+      <button class="close-btn" onclick="closeModal('productModal')">✖</button>
+      
+      <div class="slider">
+        <div class="slides" id="slides">${sliderImages}</div>
+        <div class="slider-controls">
+          <button onclick="slide(-1)">‹</button>
+          <button onclick="slide(1)">›</button>
+        </div>
+      </div>
+
+      <div class="modal-product-details">
+        <h3>${p.name}</h3>
+        <p><strong>Opis:</strong> ${p.description}</p>
+        <p class="product-price">Cijena: ${p.price} KM</p>
+        <div class="quantity-wrapper">
+          <label for="quantitySelect">Količina:</label>
+          ${quantitySelect}
+        </div>
+      </div>
+
+      <div class="product-actions" style="display:flex; gap:10px; justify-content:center;">
+        <button onclick="buyNow(${index})">Kupi odmah</button>
+        <button onclick="addToCart(${index})">Dodaj u korpu</button>
+      </div>
+    `;
+
+    document.getElementById('productModalContent').innerHTML = modal;
+    slideIndex = 0;
+    updateSlider();
+    document.getElementById('productModal').style.display = 'flex';
+  };
+
+  // DOHVATI KOLIČINU
+  function getSelectedQuantity() {
+    const selectEl = document.getElementById('quantitySelect');
+    if (!selectEl) return 1;
+    return parseInt(selectEl.value) || 1;
+  }
+
+  // SLIDER
+  let slideIndex = 0;
+  window.slide = function(dir) {
+    const slides = document.getElementById('slides');
+    if (!slides) return;
+    const total = slides.children.length;
+    slideIndex = (slideIndex + dir + total) % total;
+    slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+  };
+  function updateSlider() {
+    const slides = document.getElementById('slides');
+    if (slides) {
+      slides.style.transform = `translateX(0%)`;
     }
-    
-    function submitOrder() {
-      alert('Hvala na narudžbi! Podaci su zaprimljeni.');
+  }
+
+  // KORPA
+  window.toggleCart = function() {
+    const cartDiv = document.getElementById('cart');
+    cartDiv.style.display = (cartDiv.style.display === 'none' || cartDiv.style.display === '') 
+      ? 'block' : 'none';
+  };
+
+  window.toggleDropdown = function() {
+    const dropdown = document.getElementById('dropdown');
+    dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+  };
+
+  window.closeModal = function(id) {
+    document.getElementById(id).style.display = 'none';
+  };
+
+  window.openCheckout = function() {
+    document.getElementById('checkoutModal').style.display = 'flex';
+  };
+
+  // DODAVANJE U KORPU
+  window.addToCart = function(index, forcedQty) {
+    const p = products[index];
+    const qty = forcedQty || getSelectedQuantity(); 
+    const existing = cart.find(item => item.name === p.name);
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      cart.push({...p, qty});
+    }
+    updateCart();
+  };
+
+  // KUPI ODMAH -> korpa se resetira
+  window.buyNow = function(index) {
+    const p = products[index];
+    const qty = getSelectedQuantity();
+    cart = [{...p, qty}];
+    updateCart();
+    openCheckout();
+  };
+
+  window.removeFromCart = function(index) {
+    cart.splice(index, 1);
+    updateCart();
+  };
+
+  function updateCart() {
+    const cartItems = document.getElementById('cartItems');
+    cartItems.innerHTML = '';
+    let total = 0;
+    cart.forEach((p, i) => {
+      const itemTotal = p.price * p.qty;
+      total += itemTotal;
+      cartItems.innerHTML += `
+        <li>
+          <img src="${p.images[0]}" alt="">
+          <div style="flex:1;">
+            <span>${p.qty}x ${p.name}</span><br>
+            <small>${itemTotal} KM</small>
+          </div>
+          <button onclick="removeFromCart(${i})" style="color:red;background:none;font-size:18px;">✖</button>
+        </li>
+      `;
+    });
+    document.getElementById('total').innerText = `${total} KM`;
+
+    // Badge
+    const count = cart.reduce((sum, item) => sum + item.qty, 0);
+    const badge = document.getElementById('cartCount');
+    const badgeMobile = document.getElementById('cartCountMobile');
+    if (count > 0) {
+      badge.innerText = count;
+      badge.style.display = 'inline-block';
+      badgeMobile.innerText = count;
+      badgeMobile.style.display = 'inline-block';
+    } else {
+      badge.style.display = 'none';
+      badgeMobile.style.display = 'none';
+    }
+
+    // Pohrana u localStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+
+  // SUBMIT NARUDŽBE
+  window.submitOrder = async function() {
+    // Polja iz forme (ime, telefon, adresa, grad, email)
+    const name = document.getElementById('customerName').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const city = document.getElementById('city').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    // Podaci o "kartici" (nećemo spremati u Firestore)
+    const cardNumber = document.getElementById('cardNumber').value.trim();
+    const cardExpiry = document.getElementById('cardExpiry').value.trim();
+    const cardCVV = document.getElementById('cardCVV').value.trim();
+
+    if (!name || !phone || !address || !city || !email ||
+        !cardNumber || !cardExpiry || !cardCVV) {
+      alert("Molimo popunite sva polja.");
+      return;
+    }
+
+    // Izračunaj total
+    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+    try {
+      // Spremamo samo podatke o kupcu, artiklima i totalu u Firestore (npr. "orders" kolekcija)
+      await addDoc(collection(db, "orders"), {
+        name,
+        phone,
+        address,
+        city,
+        email,
+        items: cart.map(item => ({
+          name: item.name,
+          price: item.price,
+          qty: item.qty
+        })),
+        total,
+        createdAt: serverTimestamp(),
+      });
+
+      // "Naplatimo" - simulacija (ovdje možete dodati pravi payment gateway)
+      // Kartične podatke NE spremamo:
+      console.log("Simulacija naplate s karticom: ", cardNumber, cardExpiry, cardCVV);
+
+      alert("Hvala na narudžbi! Podaci su zaprimljeni i narudžba je kreirana.");
       cart = [];
       updateCart();
       closeModal('checkoutModal');
       closeModal('productModal');
+    } catch (err) {
+      console.error("Greška pri spremanju narudžbe:", err);
+      alert("Došlo je do greške pri slanju narudžbe. Pokušajte ponovo.");
     }
-    
-    function addToCart(index) {
-      const p = products[index];
-      const existing = cart.find(item => item.name === p.name);
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        cart.push({...p, qty: 1});
-      }
-      updateCart();
-    }
-    
-    function buyNow(index) {
-      const p = products[index];
-      cart = [{...p, qty: 1}];
-      updateCart();
-      openCheckout();
-    }
-    
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      updateCart();
-    }
-    
-    function updateCart() {
-      const cartItems = document.getElementById('cartItems');
-      cartItems.innerHTML = '';
-      let total = 0;
-      cart.forEach((p, i) => {
-        total += p.price * p.qty;
-        cartItems.innerHTML += `
-          <li>
-            <img src="${p.images[0]}" alt="">
-            <div style="flex:1;">
-              <span>${p.qty}x ${p.name}</span><br>
-              <small>${p.price * p.qty} KM</small>
-            </div>
-            <button onclick="removeFromCart(${i})" style="color:red;background:none;font-size:18px;">✖</button>
-          </li>
-        `;
-      });
-      document.getElementById('total').innerText = `${total} KM`;
-    
-      // Update broja
-      const count = cart.reduce((sum, item) => sum + item.qty, 0);
-      const badge = document.getElementById('cartCount');
-      const badgeMobile = document.getElementById('cartCountMobile');
-      if (count > 0) {
-        badge.innerText = count;
-        badge.style.display = 'inline-block';
-        badgeMobile.innerText = count;
-        badgeMobile.style.display = 'inline-block';
-      } else {
-        badge.style.display = 'none';
-        badgeMobile.style.display = 'none';
-      }
-    
-      // Sačuvaj u localStorage
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
-    
-    document.getElementById('searchInput').addEventListener('input', renderProducts);
-    renderProducts();
-    updateCart(); // učitavanje iz localStorage pri pokretanju
-    </script>
-    
-  </body>
-  </html>
-  
+  };
+
+  // Event listener za pretragu
+  document.getElementById('searchInput').addEventListener('input', renderProducts);
+
+  // Inicijalni prikaz (dok se Firestore ne učita)
+  renderProducts();
+  updateCart();
+</script>
+
+</body>
+</html>
