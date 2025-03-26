@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Dodaj Proizvod</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #fff0f6;
+      padding: 20px;
+      margin: 0;
+    }
+  
+    .form-container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  
+    .form-container h2 {
+      color: #d96ca1;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+  
+    input, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+  
+    button {
+      background: #d96ca1;
+      color: white;
+      font-weight: bold;
+      border: none;
+      transition: background 0.3s;
+    }
+  
+    button:hover {
+      background: #c45791;
+    }
+  
+    @media (max-width: 480px) {
+      .form-container {
+        padding: 15px;
+      }
+  
+      input, textarea, button {
+        font-size: 15px;
+        padding: 10px;
+      }
+  
+      .form-container h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+  
+</head>
+<body>
+  <div class="form-container">
+    <h2>Dodaj Proizvod</h2>
+    <input type="file" id="mainImage" accept="image/*">
+    <input type="text" id="name" placeholder="Naziv">
+    <input type="number" id="price" placeholder="Cijena (KM)">
+    <textarea id="description" placeholder="Opis" rows="4"></textarea>
+    <input type="file" id="galleryImages" accept="image/*" multiple>
+    <button onclick="saveProduct()">Objavi</button>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-storage.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAr6Y4d4Fsj_lpttvQtuFBCcx56CbeXqjs",
+      authDomain: "temu-7dc16.firebaseapp.com",
+      projectId: "temu-7dc16",
+      storageBucket: "temu-7dc16.appspot.com",
+      messagingSenderId: "1023395490993",
+      appId: "1:1023395490993:web:89c11bd10a1cf9a304c690",
+      measurementId: "G-E1JYN2R8XT"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    window.saveProduct = async function () {
+  const name = document.getElementById('name').value.trim();
+  const price = parseFloat(document.getElementById('price').value);
+  const description = document.getElementById('description').value.trim();
+  const mainFile = document.getElementById('mainImage').files[0];
+  const galleryFiles = document.getElementById('galleryImages').files;
+
+  if (!mainFile || !name || !price || !description) {
+    alert("Popuni sva obavezna polja!");
+    return;
+  }
+
+  // 1. Upload glavne slike
+  const mainImageRef = ref(storage, 'proizvodi/' + Date.now() + '-' + mainFile.name);
+  await uploadBytes(mainImageRef, mainFile);
+  const imageUrl = await getDownloadURL(mainImageRef);
+
+  // 2. Upload galerijskih slika
+  const gallery = [];
+  for (let i = 0; i < galleryFiles.length; i++) {
+    const file = galleryFiles[i];
+    const galleryRef = ref(storage, 'proizvodi/' + Date.now() + '-' + file.name);
+    await uploadBytes(galleryRef, file);
+    const url = await getDownloadURL(galleryRef);
+    gallery.push(url);
+  }
+
+  // 3. Spremi sve u Firestore
+  await addDoc(collection(db, "proizvodi"), {
+    name,
+    price,
+    imageUrl,
+    description,
+    gallery
+  });
+
+  alert("Proizvod objavljen!");
+  window.location.href = "untitled-1.html";
+};
+
+  </script>
+</body>
+</html>
